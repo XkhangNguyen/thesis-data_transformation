@@ -1,0 +1,121 @@
+nameOverride: ""
+fullnameOverride: ""
+commonLabels: {}
+
+image:
+  registry: docker.io
+  repository: kubeflow/spark-operator
+  tag: ""
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+controller:
+  replicas: 1
+  workers: 10
+  logLevel: info
+
+  uiService:
+    enable: true
+
+  uiIngress:
+    enable: false
+    urlFormat: ""
+
+  batchScheduler:
+    enable: false
+
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+
+  rbac:
+    create: true
+    annotations: {}
+
+  labels: {}
+  annotations: {}
+  volumes: []
+  volumeMounts: []
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  priorityClassName: ""
+  podSecurityContext: {}
+  topologySpreadConstraints: []
+  env: []
+  envFrom: []
+  resources: {}
+  securityContext: {}
+  sidecars: []
+  podDisruptionBudget:
+    enable: false
+    minAvailable: 1
+
+webhook:
+  replicas: 1
+  logLevel: info
+  port: 9443
+  portName: webhook
+  failurePolicy: Fail
+  timeoutSeconds: 10
+
+  resourceQuotaEnforcement:
+    enable: false
+
+  serviceAccount:
+    create: true
+    name: ""
+    annotations: {}
+
+  rbac:
+    create: true
+    annotations: {}
+
+  labels: {}
+
+  annotations: {}
+  sidecars: []
+  volumes: []
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  priorityClassName: ""
+  podSecurityContext: {}
+  topologySpreadConstraints: []
+  env: []
+  envFrom: []
+  volumeMounts: []
+  resources: {}
+  securityContext: {}
+  podDisruptionBudget:
+    enable: false
+    minAvailable: 1
+
+spark:
+  jobNamespaces:
+  - spark-jobs
+
+  serviceAccount:
+    create: true
+    name: "spark-jobs"
+    annotations: {}
+
+  rbac:
+    create: true
+    annotations: {}
+
+prometheus:
+  metrics:
+    enable: true
+    port: 8080
+    portName: metrics
+    endpoint: /metrics
+    prefix: ""
+  podMonitor:
+    create: false
+    labels: {}
+    jobLabel: spark-operator-podmonitor
+    podMetricsEndpoint:
+      scheme: http
+      interval: 5s
