@@ -93,16 +93,15 @@ webhook:
     minAvailable: 1
 
 spark:
-  jobNamespaces:
-  - spark-jobs
+  jobNamespaces: []
 
   serviceAccount:
-    create: true
-    name: "spark-jobs"
+    create: false
+    name: ""
     annotations: {}
 
   rbac:
-    create: true
+    create: false
     annotations: {}
 
 prometheus:
